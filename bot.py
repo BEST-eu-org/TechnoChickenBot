@@ -39,7 +39,7 @@ def from_json(json_object):
 
 @bot.message_handler(commands=['start']) # welcome message handler
 def send_welcome(message):
-    bot.send_message(message, '👋🏻')
+    bot.send_message(message.chat.id, '👋🏻')
 
 @bot.message_handler(commands=['help']) # help message handler
 def send_welcome(message):

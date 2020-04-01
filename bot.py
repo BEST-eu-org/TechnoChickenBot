@@ -10,8 +10,13 @@ import os.path
 import logging
 import argparse
 
+import psycopg2
 
-TELEGRAM_TOKEN = os.environ.get('TELEGRAM_TOKEN', None)
+DATABASE_URL = os.environ['DATABASE_URL']
+conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+
+
+TELEGRAM_TOKEN = os.environ['TELEGRAM_TOKEN']
 bot = telebot.TeleBot(token=TELEGRAM_TOKEN)
 server = Flask(__name__)
 

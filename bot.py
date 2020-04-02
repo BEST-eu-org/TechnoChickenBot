@@ -61,7 +61,7 @@ def handle_whois(message):
     if result.status_code != 200:
         bot.reply_to(message, 'Please send me a user id')
         return result.status_code
-    if result.data == '':
+    if result.text.strip() == '':
         bot.reply_to(message, 'I couldn\'t find the person you are looking for')
         return 404
     user = result.json()

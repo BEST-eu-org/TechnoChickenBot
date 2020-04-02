@@ -10,6 +10,8 @@ import os.path
 import logging
 import argparse
 
+import request
+
 import psycopg2
 
 DATABASE_URL = os.environ['DATABASE_URL']
@@ -53,9 +55,13 @@ def handle_help(message):
     bot.reply_to(message, 'We are still developing this bot 😉')
 
 @bot.message_handler(commands=['whois']) # whois message handler
-def send_whois(message):
+def handle_whois(message):
     result = requests.get('https://www.best.eu.org/webhook/whois.jsp?token='+BEST_TOKEN+'&person='+message)
-    message = result.firstname + ' ' + lastname
+    if result.data == '':
+        bot.reply_to(message, 'I couldn\'t find the person you are looking for')
+        return
+    user = result.json()
+    message = user['firstname'] + ' ' + user['lastname']
     bot.reply_to(message, message)
 
 ################################################################

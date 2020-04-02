@@ -10,7 +10,7 @@ import os.path
 import logging
 import argparse
 
-import request
+import requests
 
 import psycopg2
 

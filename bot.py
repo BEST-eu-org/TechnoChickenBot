@@ -20,6 +20,8 @@ TELEGRAM_TOKEN = os.environ['TELEGRAM_TOKEN']
 bot = telebot.TeleBot(token=TELEGRAM_TOKEN)
 server = Flask(__name__)
 
+BOT_TOKEN = os.environ['BOT_TOKEN']
+
 ################################################################
 
 def findat(msg):
@@ -43,12 +45,18 @@ def from_json(json_object):
 ################################################################
 
 @bot.message_handler(commands=['start']) # welcome message handler
-def send_welcome(message):
+def handle_start(message):
     bot.send_message(message.chat.id, '👋🏻')
 
 @bot.message_handler(commands=['help']) # help message handler
-def send_welcome(message):
+def handle_help(message):
     bot.reply_to(message, 'We are still developing this bot 😉')
+
+@bot.message_handler(commands=['whois']) # whois message handler
+def send_whois(message):
+    result = requests.get('https://www.best.eu.org/webhook/whois.jsp?token='+BEST_TOKEN+'&person='+message)
+    message = result.firstname + ' ' + lastname
+    bot.reply_to(message, message)
 
 ################################################################
 

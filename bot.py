@@ -65,8 +65,8 @@ def handle_whois(message):
         bot.reply_to(message, 'I couldn\'t find the person you are looking for')
         return 404
     user = result.json()
-    message = user['firstname'] + ' ' + user['lastname']
-    bot.reply_to(message, message)
+    reply = user['firstname'] + ' ' + user['lastname']
+    bot.reply_to(message, reply)
 
 ################################################################
 

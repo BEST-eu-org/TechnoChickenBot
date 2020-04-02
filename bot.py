@@ -22,7 +22,7 @@ TELEGRAM_TOKEN = os.environ['TELEGRAM_TOKEN']
 bot = telebot.TeleBot(token=TELEGRAM_TOKEN)
 server = Flask(__name__)
 
-BOT_TOKEN = os.environ['BOT_TOKEN']
+BEST_TOKEN = os.environ['BEST_TOKEN']
 
 ################################################################
 
@@ -59,7 +59,7 @@ def handle_whois(message):
     result = requests.get('https://www.best.eu.org/webhook/whois.jsp?token='+BEST_TOKEN+'&person='+message)
     if result.data == '':
         bot.reply_to(message, 'I couldn\'t find the person you are looking for')
-        return
+        return 404
     user = result.json()
     message = user['firstname'] + ' ' + user['lastname']
     bot.reply_to(message, message)

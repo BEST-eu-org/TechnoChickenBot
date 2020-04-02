@@ -56,7 +56,11 @@ def handle_help(message):
 
 @bot.message_handler(commands=['whois']) # whois message handler
 def handle_whois(message):
-    result = requests.get('https://www.best.eu.org/webhook/whois.jsp?token='+BEST_TOKEN+'&person='+message)
+    user_id = message.text[6:].strip()
+    result = requests.get('https://www.best.eu.org/webhook/whois.jsp?token='+BEST_TOKEN+'&person='+user_id)
+    if result.status_code != 200:
+        bot.reply_to(message, 'Please send me a user id')
+        return result.status_code
     if result.data == '':
         bot.reply_to(message, 'I couldn\'t find the person you are looking for')
         return 404

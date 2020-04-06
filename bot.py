@@ -56,7 +56,7 @@ def handle_help(message):
 
 @bot.message_handler(commands=['connect']) # connect message handler
 def handle_connect(message):
-    bot.send_message(message.chat.id, 'Follow this link: https://pa.best.eu.org/webhook/telegram.jsp?user='+str(message.from.id))
+    bot.send_message(message.chat.id, 'Follow this link: https://pa.best.eu.org/webhook/telegram.jsp?user='+str(message['from']['id']))
 
 @bot.message_handler(commands=['whois']) # whois message handler
 def handle_whois(message):
